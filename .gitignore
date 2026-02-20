@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+*.pkl
+*.png
+models/
+data/cleaned_churn_data.csv
+monitoring/
+.DS_Store
+.env
+reports/figures/

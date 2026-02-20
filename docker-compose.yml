@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  # ── FastAPI prediction backend ─────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: churnsense_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models # share trained models
+      - ./data:/app/data # share processed data
+      - ./monitoring:/app/monitoring
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  # ── Streamlit dashboard ────────────────────────────────────────────────────
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: churnsense_dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./monitoring:/app/monitoring
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - api
+    restart: unless-stopped
