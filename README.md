@@ -43,15 +43,11 @@ The strongest churn drivers I found: contract type, tenure, monthly charges, and
 
 | Model | Acc | Prec | Rec | F1 | AUC | CV-AUC |
 |---|---|---|---|---|---|---|
-| **Logistic Regression** ✅ | 0.774 | 0.555 | 0.746 | **0.636** | 0.847 | **0.850** |
-| XGBoost | 0.775 | 0.559 | 0.717 | 0.628 | 0.846 | 0.845 |
+| **XGBoost** ✅ | **0.776** | 0.559 | 0.738 | **0.636** | **0.848** | **0.850** |
+| Logistic Regression | 0.774 | 0.555 | 0.746 | 0.636 | 0.847 | 0.850 |
 | Random Forest | 0.768 | 0.546 | 0.741 | 0.629 | 0.834 | 0.839 |
 
-**Decision threshold** optimised per-model via OOF precision-recall curves (not default 0.5) — important for maximising recall on churned customers without drowning retention teams in false positives.
-
-**Explainability split:**  
-- Predictions → Logistic Regression (`best_model.pkl`) — best CV-AUC × F1  
-- SHAP → XGBoost (`shap_explainer.pkl`) — TreeExplainer native support
+XGBoost selected as production model — tuned via `RandomizedSearchCV` (40 iterations, 5-fold CV) with OOF threshold optimisation. Both predictions and SHAP explanations use XGBoost.
 
 ---
 
