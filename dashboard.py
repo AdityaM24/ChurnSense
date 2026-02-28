@@ -1,3 +1,11 @@
+"""
+ChurnSense Dashboard
+Author : Aditya Mahale
+About  : Streamlit dashboard for the churn prediction system.
+         Shows KPI cards, EDA charts, a live prediction form, and a
+         SHAP explanation chart for every prediction — built so a
+         retention team can use it without touching any code.
+"""
 import os
 import sys
 import warnings
@@ -13,7 +21,7 @@ from data.feature_engineering import create_features
 
 st.set_page_config(
     page_title="ChurnSense | by Aditya Mahale",
-    page_icon="📉",
+    page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -198,4 +206,4 @@ if submitted:
         st.error(f"Prediction error: {e}")
 
 st.divider()
-st.caption("ChurnSense · Aditya Mahale · IBM Telco Dataset · Logistic Regression + Random Forest + SHAP")
+st.caption("ChurnSense · Aditya Mahale · IBM Telco Dataset · Logistic Regression + Random Forest + XGBoost + SHAP")

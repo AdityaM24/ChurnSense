@@ -1,3 +1,11 @@
+"""
+ChurnSense — Prediction API
+Author : Aditya Mahale
+About  : FastAPI backend that serves the trained churn model.
+         POST /predict returns churn probability, risk level, and the
+         top SHAP feature drivers for the given customer — so downstream
+         CRM systems get an explanation alongside every prediction.
+"""
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
@@ -12,7 +20,7 @@ shap_data = joblib.load("models/shap_explainer.pkl") if os.path.exists("models/s
 explainer = shap_data["explainer"] if shap_data else None
 feat_names = shap_data["feature_names"] if shap_data else None
 
-app = FastAPI(title="Churn Prediction API", version="1.0.0")
+app = FastAPI(title="Churn Prediction API", version="1.1.0")
 
 
 class CustomerData(BaseModel):

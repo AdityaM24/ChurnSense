@@ -1,3 +1,13 @@
+"""
+ChurnSense — Model Monitoring
+Author : Aditya Mahale
+About  : ModelMonitor tracks F1 and AUC over new data batches and fires
+         an alert when either metric drops >15% relative to the training
+         baseline — a lightweight but practical production health check.
+         Logs are written to monitoring/performance_log.csv; alerts go
+         to monitoring/alerts.log so they can be piped into any alerting
+         system (Slack, PagerDuty, email, etc.).
+"""
 import os
 import warnings
 import joblib
